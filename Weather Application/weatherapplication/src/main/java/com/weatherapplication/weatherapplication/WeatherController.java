@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000", "http://127.0.0.1:3000"}) // Allow requests from both localhost and 127.0.0.1
+@CrossOrigin(origins = {
+    "http://localhost:5173",
+    "http://127.0.0.1:5173" // Optional, in case the browser uses 127.0.0.1
+}) // Allow requests from both localhost and 127.0.0.1
 public class WeatherController {
 
     @Value("${openweathermap.api.key}")
