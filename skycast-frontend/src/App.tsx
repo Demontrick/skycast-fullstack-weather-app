@@ -93,7 +93,7 @@ function App() {
         >
           <motion.input
             type="text"
-            placeholder="🌍 Country Code (e.g., US, PT)"
+            placeholder="🌍 Country Name (e.g., US, Germany)"
             value={country}
             onChange={(e) => setCountry(e.target.value)}
             required
