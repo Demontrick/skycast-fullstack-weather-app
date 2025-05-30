@@ -1,11 +1,12 @@
 # Use an official Java runtime as a parent image
-FROM openjdk:17-jdk-slim
+FROM openjdk:23-jdk-slim
+
 
 # Set the working directory
 WORKDIR /app
 
 # Copy the Maven-built JAR from local to the container
-COPY target/*.jar app.jar
+COPY target/weatherapplication-0.0.1-SNAPSHOT.jar app.jar
 
 # Expose the port your app runs on
 EXPOSE 8080
