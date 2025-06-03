@@ -3,6 +3,5 @@
 .gitignore
 README.md
 HELP.md
-Dockerfile
 *.iml
 .vscode/
