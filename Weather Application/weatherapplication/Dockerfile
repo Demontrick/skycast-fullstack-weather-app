@@ -1,25 +1,24 @@
-# Use an official Java runtime as a parent image
-FROM openjdk:23-jdk-slim
+# --- Stage 1: Build the app ---
+FROM maven:3.9.6-eclipse-temurin-23 AS builder
 
-# Install Maven and dependencies
-RUN apt-get update && \
-    apt-get install -y maven && \
-    apt-get clean
-
-# Set the working directory
 WORKDIR /app
 
-# Copy the entire project into the container
+# Copy the source code into the container
 COPY . .
 
-# Build the project using Maven, skipping tests for faster build
+# Package the app (skip tests to speed up)
 RUN mvn clean package -DskipTests
 
-# Copy the built JAR to a separate app.jar file
-COPY target/weatherapplication-0.0.1-SNAPSHOT.jar app.jar
+# --- Stage 2: Run the app ---
+FROM openjdk:23-jdk-slim
 
-# Expose the port your app runs on
+WORKDIR /app
+
+# Copy only the built JAR from the builder stage
+COPY --from=builder /app/target/weatherapplication-0.0.1-SNAPSHOT.jar app.jar
+
+# Expose the port the app listens on
 EXPOSE 8080
 
-# Run the JAR file
+# Start the app
 ENTRYPOINT ["java", "-jar", "app.jar"]
