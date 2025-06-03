@@ -28,7 +28,7 @@ function App() {
 
     try {
       const res = await fetch(
-        `http://localhost:8080/weather?city=${city}&country=${country}`,
+        `https://skycast-backend-qn3a.onrender.com/weather?city=${city}&country=${country}`,
         { method: 'GET', headers: { 'Cache-Control': 'no-cache' } }
       );
       if (!res.ok) throw new Error('Network error');
